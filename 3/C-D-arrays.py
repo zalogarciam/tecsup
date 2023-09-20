@@ -49,20 +49,24 @@ matriz[3][3] = 9
 # Operaciones
 
 arreglo = [2 , 4, 10, 5, 15, 3, 15]
-print(arreglo)
-arreglo.append(99) # Tiempo O(1)
-print(arreglo)
-arreglo.insert(3, 100) # Tiempo O(n)
-print(arreglo)
-arreglo.remove(15) # Tiempo O(n)
-print(arreglo)
-print(arreglo.index(99)) # Tiempo O(n)
+# int[] arreglo = new int[10]  Tamano fijo
 
-element_buscar = 101 
-def buscar_elemento(element_buscar):
-    for item in arreglo:
-        if item == element_buscar:
-            print("Numero encontrado")
-            return
-    print("Numero no encontrado")
-buscar_elemento(element_buscar)
+# print(arreglo)
+# arreglo.append(99) # Tiempo O(1)
+# print(arreglo)
+# arreglo.insert(3, 100) # Tiempo O(n)
+# print(arreglo)
+# arreglo.remove(15) # Tiempo O(n)
+# print(arreglo)
+# print(arreglo.index(99)) # Tiempo O(n)
+
+print(arreglo[4]) # O(1)
+
+# element_buscar = 101 
+# def buscar_elemento(element_buscar):
+#     for item in arreglo:
+#         if item == element_buscar:
+#             print("Numero encontrado")
+#             return
+#     print("Numero no encontrado")
+# buscar_elemento(element_buscar)
