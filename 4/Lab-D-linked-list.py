@@ -43,17 +43,20 @@ class LinkedList():
             index +=1
         self.count += 1
 
+    def length(self):
+        return self.count
+
     def delete_first(self):
-            if self.head == None:
-                raise Exception("Lista enlazada esta vacia")
-            if self.head == self.tail:
-                self.head = None
-                self.tail = None
-            else:
-                second = self.head.next
-                self.head.next = None
-                self.head = second
-            self.count -= 1
+        if self.head == None:
+            raise Exception("Lista enlazada esta vacia")
+        if self.head == self.tail:
+            self.head = None
+            self.tail = None
+        else:
+            second = self.head.next
+            self.head.next = None
+            self.head = second
+        self.count -= 1
 
     def delete_last(self):
         if self.head == None:
@@ -99,9 +102,41 @@ class LinkedList():
             current = current.next
         return False
     
+    def concatenate(self, lista_enlazada_2):
+        lista_enlazada_3 = LinkedList()
+
+        current_1 = self.head
+        while (current_1 != None):
+            lista_enlazada_3.insert_end(current_1.data)
+            current_1 = current_1.next
+
+        current_2 = lista_enlazada_2.head
+        while current_2 != None:
+            lista_enlazada_3.insert_end(current_2.data)
+            current_2 = current_2.next
+
+        return lista_enlazada_3
+    
+    def longitud(self):
+        current = self.head
+        count = 0
+        while (current != None):
+            count +=1 
+            current = current.next
+        return count
+
 lista_enlazada = LinkedList()
 lista_enlazada.insert_end(4)
 lista_enlazada.insert_end(13)
 lista_enlazada.insert_start(7)
 lista_enlazada.print_linked_list()
+
+lista_enlazada2 = LinkedList()
+lista_enlazada2.insert_end(1)
+lista_enlazada2.insert_end(3)
+lista_enlazada2.insert_end(3)
+
+lista_enlazada_3 = lista_enlazada.concatenate(lista_enlazada2)
+lista_enlazada_3.print_linked_list()
+
 
