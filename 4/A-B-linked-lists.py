@@ -22,7 +22,7 @@ class ListaEnlazada():
         current = self.head
         while current != None:
             if current.data == valor:
-                return True
+                return True 
             current = current.next
         return False
 
