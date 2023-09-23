@@ -138,5 +138,6 @@ lista_enlazada2.insert_end(3)
 
 lista_enlazada_3 = lista_enlazada.concatenate(lista_enlazada2)
 lista_enlazada_3.print_linked_list()
+print(lista_enlazada.longitud())
 
 
