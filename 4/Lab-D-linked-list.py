@@ -90,8 +90,18 @@ class LinkedList():
             print(current.data, end="==>")
             current = current.next
         print("None")
+
+    def search(self, valor):
+        current = self.head
+        while current != None:
+            if current.data == valor:
+                return True
+            current = current.next
+        return False
+    
 lista_enlazada = LinkedList()
 lista_enlazada.insert_end(4)
 lista_enlazada.insert_end(13)
 lista_enlazada.insert_start(7)
 lista_enlazada.print_linked_list()
+
