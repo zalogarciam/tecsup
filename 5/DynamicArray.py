@@ -33,4 +33,12 @@ dynamic_array.insert(8)
 dynamic_array.insert(11)
 dynamic_array.insert(15)
 dynamic_array.insert(20)
-dynamic_array.print_dynamic_array()
+# dynamic_array.print_dynamic_array()
+
+matriz = [[0,1,2],[3,4,5],[6,7,8]]
+for row in matriz:
+    print(row)
+
+for i in range(3):
+    for j in range(3):
+        print(matriz[i][j])
