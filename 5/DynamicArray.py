@@ -15,6 +15,9 @@ class DynamicArray():
         self.items[self.index] = value
         self.index += 1
 
+    def size(self):
+        return self.index
+    
     def print_dynamic_array(self):
         for item in self.items:
             print("[", item, "]", end=" ")
