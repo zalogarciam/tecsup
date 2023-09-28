@@ -1,0 +1,5 @@
+comparison("(())"))
+# print(parenthesis_comparison("((()()))"))
+# print(parenthesis_comparison("((()()"))
+# print(parenthesis_comparison("((())"))
+# print(parenthesis_comparison(")("))
