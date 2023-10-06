@@ -27,3 +27,10 @@ print(stack)
 # Pop -->               O(1)        O(1)       
 # Size -->              O(1)        O(1)
 # Top/Peek -->          O(1)        O(1)
+
+queue = []
+queue.append((1, 1))
+queue.append((0, 0))
+queue.append((2, 2))
+queue.append((3, 3))
+print(queue)
