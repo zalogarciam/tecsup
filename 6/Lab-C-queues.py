@@ -1,5 +1,3 @@
-
-
 from datetime import date
 
 
@@ -14,9 +12,6 @@ class LinkedList():
         self.tail = None
         self.count = 0
 
-    def length(self):
-        return self.count
-    
     def insert_start(self, data):
         new_node = Node(data)
         if self.head == None:
@@ -25,7 +20,7 @@ class LinkedList():
         else:
             new_node.next = self.head
             self.head = new_node
-        self.count += 1
+        self.count +=1
 
     def insert_end(self, data):
         new_node = Node(data)
@@ -35,7 +30,7 @@ class LinkedList():
         else:
             self.tail.next = new_node
             self.tail = new_node
-        self.count += 1
+        self.count +=1
 
     def insert_mid(self, data, position):
         new_node = Node(data)
@@ -50,26 +45,22 @@ class LinkedList():
                 return
             current = current.next
             index +=1
-        self.count += 1
+        self.count+=1
 
     def delete_first(self):
-        deleted_item = None
         if self.head == None:
             raise Exception("Lista enlazada esta vacia")
         if self.head == self.tail:
-            deleted_item = self.head
             self.head = None
             self.tail = None
         else:
-            deleted_item = self.head
             second = self.head.next
             self.head.next = None
             self.head = second
         self.count -= 1
-        return deleted_item.data
 
     def delete_last(self):
-        deleted_value = None
+        pop_item = None
         if self.head == None:
             raise Exception("Lista enlazada esta vacia")
         current = self.head
@@ -79,13 +70,14 @@ class LinkedList():
         else:
             while current != None:
                 if current.next == self.tail:
-                    deleted_value = current.next.data
+                    pop_item = current.next.data
                     break
                 current = current.next
             current.next = None
             self.tail = current
         self.count -= 1
-        return deleted_value
+        return pop_item
+
     def delete_mid(self, data):
         current = self.head
         previous = None
@@ -96,14 +88,17 @@ class LinkedList():
                 break
             current = current.next
         previous.next = current.next
-        self.count -= 1
+        self.count -=1
+
+    def longitud(self):
+        return self.count
 
     def print_linked_list(self):
         current = self.head
-        while current!=None:
-            print(current.data, end=" ")
+        while current != None:
+            print(current.data, end=" --> ")
             current = current.next
-        print()
+        print("None")
 
 class Queue(LinkedList):
     def __init__(self) -> None:
@@ -117,106 +112,105 @@ class Queue(LinkedList):
 
     def size(self):
         return self.count
-    
+
     def front(self):
         return self.head.data
-    
+
     def is_empty(self):
         return self.count == 0
     
 # queue = Queue()
-# queue.enqueue(7)
-# queue.enqueue(1)
-# queue.enqueue(0)
 # queue.enqueue(4)
 # queue.enqueue(5)
+# queue.enqueue(1)
+# queue.enqueue(3)
+# queue.enqueue(8)
 # queue.print_linked_list()
-# print(queue.dequeue())
+# queue.dequeue()
 # print(queue.size())
-# print(queue.is_empty())
 # print(queue.front())
-# queue.print_linked_list()
+# print(queue.is_empty())
 
-class QueueArray():
+class ArrayQueue():
     def __init__(self) -> None:
         self.items = []
 
     def enqueue(self, value):
         self.items.append(value)
-    
+
     def dequeue(self):
-        # del, remove, pop
         return self.items.pop(0)
-    
+
     def size(self):
         return len(self.items)
-    
+
     def front(self):
         return self.items[0]
-    
+
     def is_empty(self):
         return len(self.items) == 0
-
-    def print(self):
-        print(self.items)
-
-# queue = QueueArray()
-# queue.enqueue(7)
-# queue.enqueue(1)
-# queue.enqueue(0)
-# queue.enqueue(4)
-# queue.enqueue(5)
-# queue.print()
-# print(queue.dequeue())
-# print(queue.size())
-# print(queue.is_empty())
-# print(queue.front())
-# queue.print()
+    
 
 
-class SocialNetwork():
+class Clinic():
     def __init__(self, name) -> None:
         self.name = name
-
-class User():
-    def __init__(self, name) -> None:
-        self.name = name
-        self.email = None
-        self.phone = None
+        self.web = None
+        self.address = None
         self.queue = []
 
-    def send_message(self, content, to):
-        msg = Message(content)
-        to.queue.append(msg)
+    def add(self, appointment):
+        self.queue.append(appointment)
 
-    def receive_message(self):
-        msg = self.queue.pop(0)
-        print(msg)
+    def attended(self):
+        self.queue.pop(0)
 
-    # def enqueue_message(self):
-    #     pass
+    def show(self):
+        for appointment in self.queue:
+            print(appointment)
 
-class Message():
-    def __init__(self, content) -> None:
-        self.content = content
-        self.date = date.today()
+    def calculate_average(self):
+        sum = 0
+        for appointment in self.queue:
+            sum = appointment.difference
+        return sum // len(self.queue)
+
+class Patient():
+    def __init__(self, name) -> None:
+        self.name = name
+        self.id = None
+        self.address = None
+        self.age = None
+
+class Appointment():
+    def __init__(self, patient, date, room) -> None:
+        self.patient = patient
+        self.date = date
+        self.start_date = None
+        self.end_date = None
+        self.difference = self.end_date - self.start_date
+        self.room = room
 
     def __str__(self) -> str:
-        return self.content + " (Message sent at " + str(self.date) + ")"
+        result = ""
+        result += "Patient: " + self.patient.name + "\n"
+        result += "Date: " + self.date + "\n"
+        result += "Room: " + self.room + "\n"
+        return result
+       
+# clinica = Clinic("Espiritu Santo")
+# appointment1 = Appointment(Patient('Raul'), "10/7/2023", "A101")
+# appointment2 = Appointment(Patient('Jessica'), "10/20/2023", "A102")
+# appointment3 = Appointment(Patient('Jorge'), "10/12/2023", "A101")
+# clinica.add(appointment1)
+# clinica.add(appointment2)
+# clinica.add(appointment3)
+# clinica.show()
+# clinica.attended()
+# clinica.show()
+# clinica.attended()
+# clinica.show()
 
-# facebook = SocialNetwork("Facebook")
-# gerardo = User("Gerardo")
-# mary = User("Mary")
-# gerardo.send_message("Hello...", mary)
-# gerardo.send_message("How are you...", mary)
-# gerardo.send_message("Why ...", mary)
-# gerardo.send_message("Hey...", mary)
-# gerardo.send_message(".....", mary)
-# gerardo.send_message("Bye ...", mary)
-# mary.receive_message()
-# mary.receive_message()
-# mary.receive_message()
-# mary.receive_message()
 
 class Element():
     def __init__(self, value, priority) -> None:
@@ -224,7 +218,7 @@ class Element():
         self.priority = priority
 
     def __str__(self) -> str:
-        return "Value: " + str(self.value) + " Priority: " + str(self.priority)
+        return "Value: " + self.value + " Priority: " + str(self.priority)
 
 class PriorityQueue():
     def __init__(self) -> None:
@@ -239,78 +233,48 @@ class PriorityQueue():
                     break
             self.items.insert(i, element)
 
-    def print(self):
-        for item in self.items:
-            print(item)
+    def show(self):
+        for element in self.items:
+            print(element)
 
-# priority_queue = PriorityQueue()
-# priority_queue.enqueue(Element(3, 1))
-# priority_queue.enqueue(Element(1, 3))
-# priority_queue.enqueue(Element(8, 3))
-# priority_queue.enqueue(Element(9, 7))
-# priority_queue.enqueue(Element(5, 5))
-# priority_queue.print()
+priority_queue = PriorityQueue()
+priority_queue.enqueue(Element("A", 1))
+priority_queue.enqueue(Element("C", 3))
+priority_queue.enqueue(Element("X", 3))
+priority_queue.enqueue(Element("F", 10))
+priority_queue.enqueue(Element("G", 5))
 
-class Restaurant():
+# priority_queue.show()
+
+class Event():
     def __init__(self, name) -> None:
         self.name = name
-        self.clients = []
         self.queue = []
+    
+    def add(self, participant):
+        self.queue.append(participant)
 
-    def register(self, order):
-        self.queue.append(order)
+    def remove(self):
+        self.queue.pop(0)
 
-    def served(self):
-        return self.queue.pop(0)
+    def show(self):
+        print("PARTICIPANTS")
+        for participant in self.queue:
+            print(participant)
 
-class Client():
-    def __init__(self, name) -> None:
-        self.name = name
-        self.order = Order()
-
-    def ask_plate(self, plate):
-        self.order.add_plate_to_order(Plate(plate))
-
-    def cancel_order(self):
-        pass
-
-class Order():
-    def __init__(self) -> None:
-        self.plates = []
-
-    def add_plate_to_order(self, plate):
-        self.plates.append(plate)
-
-    def show_order(self):
-        for plate in self.plates:
-            print(plate)
-
-    def __str__(self) -> str:
-        result = "Client Served:\n"
-        for plate in self.plates:
-            result += plate.name + "\n"
-        return result
-
-class Plate():
+class Participant():
     def __init__(self, name) -> None:
         self.name = name
 
     def __str__(self) -> str:
-        return 'Plate: ' + self.name
+        return self.name
 
-restaurant = Restaurant("PPs")
-tecsup = Client("TECSUP")
-tecsup.ask_plate("Cuy Chactao")
-tecsup.ask_plate("Chicharron")
-tecsup.ask_plate("Helado")
-tecsup.order.show_order()
-restaurant.register(tecsup.order) # enqueue
-
-ucsp = Client("UCSP")
-ucsp.ask_plate("Rocoto")
-ucsp.ask_plate("Adobo")
-ucsp.ask_plate("Pollo Broaster")
-ucsp.order.show_order()
-restaurant.register(ucsp.order) # enqueue
-
-print(restaurant.served())
+event = Event("Fito Paez")
+event.add(Participant('Marco'))
+event.add(Participant('Jesus'))
+event.add(Participant('Mary'))
+event.add(Participant('Jess'))
+event.add(Participant('Pedro'))
+event.show()
+event.remove()
+event.show()
