@@ -70,6 +70,20 @@ class BinarySearchTree():
             elif data < root.data:
                 return self.search(data, root.left)
         
+    def height(self, root):
+        if root is None: return -1
+        return max(self.height(root.left), self.height(root.right)) + 1
+
+    def min(self, root):
+        if root.left is None: 
+            return root.data
+        return self.min(root.left)
+    
+    def max(self, root):
+        if root.right is None: 
+            return root.data
+        return self.max(root.right)
+    
 bst = BinarySearchTree()
 bst.root = Node(8)
 bst.insert_(4, bst.root)
@@ -81,4 +95,7 @@ bst.insert_(18, bst.root)
 bst.insert_(14, bst.root)
 print(bst.search(14, bst.root))
 print(bst.search(0, bst.root))
-bst.in_order_level(bst.root)
+bst.post_order(bst.root)
+print(bst.height(bst.root))
+print(bst.min(bst.root))
+print(bst.max(bst.root))
