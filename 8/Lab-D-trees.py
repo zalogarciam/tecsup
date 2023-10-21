@@ -41,6 +41,35 @@ class BinarySearchTree():
             print(root.data)
             self.in_order(root.right)
 
+    def pre_order(self, root):
+        if root != None:
+            print(root.data)
+            self.pre_order(root.left)
+            self.pre_order(root.right)
+
+    def post_order(self, root):
+        if root != None:
+            self.post_order(root.left)
+            self.post_order(root.right)
+            print(root.data)
+
+    def in_order_level(self, root, level= 0):
+        if root != None:
+            self.in_order_level(root.left, level + 1)
+            print((level * 4 * "-") + str(root.data))
+            self.in_order_level(root.right, level + 1)
+
+    def search(self, data, root):
+        if root is None:
+            return False
+        else:
+            if data == root.data:
+                return True
+            elif data > root.data:
+                return self.search(data, root.right)
+            elif data < root.data:
+                return self.search(data, root.left)
+        
 bst = BinarySearchTree()
 bst.root = Node(8)
 bst.insert_(4, bst.root)
@@ -50,4 +79,6 @@ bst.insert_(6, bst.root)
 bst.insert_(13, bst.root)
 bst.insert_(18, bst.root)
 bst.insert_(14, bst.root)
-bst.in_order(bst.root)
+print(bst.search(14, bst.root))
+print(bst.search(0, bst.root))
+bst.in_order_level(bst.root)
