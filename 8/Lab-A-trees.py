@@ -34,6 +34,45 @@ class BinarySearchTree():
             root.left = self.insert_(root.left, value)
         return root
 
+    def delete(self, root, value):
+        if root is None:
+            return
+        if value > root.data:
+            root.right = self.delete(root.right, value)
+        elif value < root.data:
+            root.left = self.delete(root.left, value)
+        else:
+            # Leaf Node?
+            if root.left is None and root.right is None:
+                return None
+            
+            # One child
+            if root.left is None:
+                return root.right
+            if root.right is None:
+                return root.left
+            
+            # Two chidren
+            min_value = self.min(root.right)
+            root.data = min_value
+            root.right = self.delete(root.right, min_value)
+        
+        return root
+
+    def min(self, root):
+        if root.left is None: return root.data
+        return self.min(root.left)
+    
+    def search(self, root, value):
+        if root is None:
+            return False
+        if value == root.data:
+            return True
+        elif value > root.data:
+            return self.search(root.right, value)
+        else:
+            return self.search(root.left, value)
+
     def in_order(self, root, level = 1):
         if root is not None:
             self.in_order(root.left, level + 1)
@@ -53,14 +92,18 @@ class BinarySearchTree():
             print(str(root.data))
 
 bst = BinarySearchTree()
-tmp = bst.insert_(bst.root, 4)
-tmp = bst.insert_(tmp, 2)
-tmp = bst.insert_(tmp, 6)
-tmp = bst.insert_(tmp, 1)
-tmp = bst.insert_(tmp, 3)
-tmp = bst.insert_(tmp, 5)
-tmp = bst.insert_(tmp, 4.5)
-bst.post_order(tmp)
+bst.root = Node(4)
+
+bst.insert_(bst.root, 2)
+bst.insert_(bst.root, 6)
+bst.insert_(bst.root, 1)
+bst.insert_(bst.root, 3)
+bst.insert_(bst.root, 5)
+bst.insert_(bst.root, 0)
+bst.delete(bst.root, 4)
+print(bst.search(bst.root, 0))
+print(bst.search(bst.root, 4))
+bst.in_order(bst.root)
 
 # bst_root = Node(10)
 # bst_root.left = Node(7)
