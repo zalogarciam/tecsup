@@ -9,6 +9,9 @@ class AVLTree():
     def __init__(self) -> None:
         self.root = None
 
+    def insert_(self, value):
+        self.root = self.insert(self.root, value)
+
     def insert(self, root, value):
         if root is None:
             return AVLNode(value)
@@ -71,11 +74,11 @@ class AVLTree():
         return root
     
 tree = AVLTree()
-tree.insert(tree.root, 12)
+tree.insert_(12)
 
-tree.insert(tree.root, 3)
-tree.insert(tree.root, 9)
-# tree.insert(tree.root, 4)
-# tree.insert(tree.root, 6)
-# tree.insert(tree.root, 2)
+tree.insert_(3)
+tree.insert_(9)
+tree.insert_(4)
+tree.insert_(6)
+tree.insert_(2)
 tree.in_order(tree.root)
