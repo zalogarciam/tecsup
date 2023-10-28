@@ -44,11 +44,42 @@ class BinarySearchTree():
         elif data < root.data:
             return self.search(root.left, data)
 
+    def delete(self, root, value):
+        # No root
+        if not root:
+            return root
+        
+        if root.data > value:
+            root.left = self.delete(root.left, value)
+        elif root.data < value:
+            root.right = self.delete(root.right, value)
+        else: # Element found
+            # Leaf Node
+            if root.left is None and root.right is None:
+                return None
+            # One child
+            if root.right is None:
+                return root.left
+            if root.left is None:
+                return root.right
+            
+            # Two children
+            min_value = self.min(root.right)
+            root.data = min_value
+            root.right = self.delete(root.right, min_value)
+        return root
+    
     def in_order(self, root):
         if root != None:
             self.in_order(root.left)
             print(root.data)
             self.in_order(root.right)
+    
+    def in_order_level(self, root, level= 0):
+        if root != None:
+            self.in_order_level(root.left, level + 1)
+            print((level * 4 * "-") + str(root.data))
+            self.in_order_level(root.right, level + 1)
 
     def pre_order(self, root):
         if root != None:
@@ -97,6 +128,8 @@ bst.insert_(bst.root, 9)
 bst.insert_(bst.root, 11)
 bst.insert_(bst.root, 16)
 bst.insert_(bst.root, 12)
+bst.delete(bst.root, 11)
+bst.in_order_level(bst.root)
 # print(bst.search(bst.root, 12))
 # print(bst.search(bst.root, 0))
 # print(bst.height(bst.root))
@@ -105,11 +138,11 @@ bst.insert_(bst.root, 12)
 # bst.in_order(bst.root)
 # bst.get_ancestors(bst.root, 2)
 
-def swap(word, index):
-    if index == len(word): return
-    print(word[index])
-    swap(word, index + 1)
+# def swap(word, index):
+#     if index == len(word): return
+#     print(word[index])
+#     swap(word, index + 1)
 
-swap("ABCD", 0)
+# swap("ABCD", 0)
 
 
