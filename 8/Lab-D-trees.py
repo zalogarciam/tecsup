@@ -84,18 +84,46 @@ class BinarySearchTree():
             return root.data
         return self.max(root.right)
     
+    def delete(self, root, value):
+        # 4to caso, root is none
+        if not root:
+            return root
+        
+        # Busqueda del elemento
+        if root.data > value:
+            root.left = self.delete(root.left, value)
+        elif root.data < value:
+            root.right = self.delete(root.right, value)
+        else: # Encontrado al elemento
+            # Leaf Node
+            if root.right is None and root.left is None:
+                return None
+            
+            # One Child
+            if root.right is None:
+                return root.left
+            if root.left is None:
+                return root.right
+            
+            # Two children
+            min_value = self.min(root.right)
+            root.data = min_value
+            root.right = self.delete(root.right, min_value)
+        return root
+
 bst = BinarySearchTree()
-bst.root = Node(8)
+bst.root = Node(1)
+bst.insert_(2, bst.root)
+bst.insert_(3, bst.root)
 bst.insert_(4, bst.root)
-bst.insert_(15, bst.root)
-bst.insert_(1, bst.root)
+bst.insert_(5, bst.root)
 bst.insert_(6, bst.root)
-bst.insert_(13, bst.root)
-bst.insert_(18, bst.root)
-bst.insert_(14, bst.root)
-print(bst.search(14, bst.root))
-print(bst.search(0, bst.root))
-bst.post_order(bst.root)
-print(bst.height(bst.root))
-print(bst.min(bst.root))
-print(bst.max(bst.root))
+bst.insert_(7, bst.root)
+bst.insert_(8, bst.root)
+bst.delete(bst.root, 4)
+# print(bst.search(14, bst.root))
+# print(bst.search(0, bst.root))
+bst.in_order_level(bst.root)
+# print(bst.height(bst.root))
+# print(bst.min(bst.root))
+# print(bst.max(bst.root))
