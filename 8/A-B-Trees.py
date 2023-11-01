@@ -8,6 +8,9 @@ class Tree():
     def __init__(self) -> None:
         self.root = None
 
+    def insert(self, value):
+        pass
+
 tree = Tree()
 root_node = Node(8)
 tree.root = root_node
