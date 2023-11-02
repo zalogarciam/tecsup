@@ -14,7 +14,9 @@ class Heap(): # Max Heap
         del self.items[-1]
         self.size -= 1
         self.bubble_down()
+        return root
 
+    # Order property
     def bubble_up(self):
         index = self.size - 1
         while index > 0 and self.items[index] > self.items[self.parent(index)]:
@@ -22,7 +24,20 @@ class Heap(): # Max Heap
             index = self.parent(index)
 
     def bubble_down(self):
-        pass
+        index = 0
+        while index <= self.size and not self.is_valid_parent(index):
+            larger_child_index = self.larger_child_index(index)
+            self.swap(index, larger_child_index)
+            index = larger_child_index
+
+    # Return if the index is a valid parent
+    def is_valid_parent(self, index):
+        if not self.has_left_child(index):
+            return True
+        is_valid = self.items[index] >= self.left_child(index)
+        if self.has_right_child(index):
+            is_valid = is_valid and self.items[index] >= self.right_child(index)
+        return is_valid
 
     def swap(self, first, second):
         temp = self.items[first]
@@ -63,7 +78,8 @@ class Heap(): # Max Heap
             return self.left_child_index(index)
         else:
             return self.right_child_index(index)
-        
+
+# Max Heap
 heap = Heap()
 heap.insert(30)
 heap.insert(20)
@@ -71,4 +87,6 @@ heap.insert(10)
 heap.insert(5)
 print(heap.items)
 heap.insert(40)
+print(heap.items)
+heap.remove()
 print(heap.items)
