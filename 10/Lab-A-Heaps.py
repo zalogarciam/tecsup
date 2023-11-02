@@ -1,4 +1,4 @@
-class Heap():
+class Heap(): # Max Heap
     def __init__(self) -> None:
         self.items = []
         self.size = 0
@@ -6,9 +6,22 @@ class Heap():
     def insert(self, value):
         self.items.append(value)
         self.size += 1
-        self.bubble_up(self)
+        self.bubble_up()
+
+    def remove(self):
+        root = self.items[0]
+        self.items[0] = self.items[-1]
+        del self.items[-1]
+        self.size -= 1
+        self.bubble_down()
 
     def bubble_up(self):
+        index = self.size - 1
+        while index > 0 and self.items[index] > self.items[self.parent(index)]:
+            self.swap(index, self.parent(index))
+            index = self.parent(index)
+
+    def bubble_down(self):
         pass
 
     def swap(self, first, second):
@@ -50,3 +63,12 @@ class Heap():
             return self.left_child_index(index)
         else:
             return self.right_child_index(index)
+        
+heap = Heap()
+heap.insert(30)
+heap.insert(20)
+heap.insert(10)
+heap.insert(5)
+print(heap.items)
+heap.insert(40)
+print(heap.items)
