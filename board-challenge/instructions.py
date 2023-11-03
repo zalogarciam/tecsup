@@ -29,6 +29,13 @@ def left_rotation(array, X):
     if len(array) == 0: raise Exception("Empty array") # Array vacio
     if len(array) == 1: return array # Array con un elemento
     rotations = X % len(array)
+    
+    # Array with more than 1 element
+    # Slicing
+    # a = [1,2,3,4,5,6]
+    # a[3:] 4,5,6
+    # a[:3] 1,2,3
+    # a[3:4]
     new_array = array[rotations:] + array[:rotations] # Array con mas de 1 elemento
     return new_array
 

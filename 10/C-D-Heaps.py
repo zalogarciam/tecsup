@@ -11,6 +11,7 @@ heapq._heapify_max(values)
 print(values)
 
 heapq.heappush(values, 6)
+heapq._heapify_max(values)
 print(values)
 print(heapq.heappop(values))
 
