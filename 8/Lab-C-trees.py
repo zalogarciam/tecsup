@@ -105,6 +105,21 @@ class BinarySearchTree():
         if root.right is None: return root.data
         return self.max(root.right)
 
+    def get_nodes_at_distance(self, root, k):
+        list = []
+        self.print_nodes(root, k , list)
+        return list
+    
+    def print_nodes(self, root, k , list):
+        if root is None: return
+        if k == 0:
+            list.append(root.data)
+            return
+        self.print_nodes(root.left, k-1, list)
+        self.print_nodes(root.right, k-1, list)
+
+
+
     # def get_ancestors(self, root, target):
     #     if root is None:
     #         return False
@@ -128,8 +143,9 @@ bst.insert_(bst.root, 9)
 bst.insert_(bst.root, 11)
 bst.insert_(bst.root, 16)
 bst.insert_(bst.root, 12)
-bst.delete(bst.root, 11)
+# bst.delete(bst.root, 11)
 bst.in_order_level(bst.root)
+print(bst.get_nodes_at_distance(bst.root, 2))
 # print(bst.search(bst.root, 12))
 # print(bst.search(bst.root, 0))
 # print(bst.height(bst.root))
