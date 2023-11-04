@@ -118,7 +118,23 @@ class BinarySearchTree():
         self.print_nodes(root.left, k-1, list)
         self.print_nodes(root.right, k-1, list)
 
+    def get_nodes(self, root, list):
+        if root is None: return
+        if root.left is None and root.right is None:
+            list.append(root.data)
+        self.get_nodes(root.left, list)
+        self.get_nodes(root.right, list)
 
+    def sum_nodes(self, root):
+        # Case Base
+        if root is None: return 0
+
+        # Leaf Node
+        if root.left is None and root.right is None:
+            return 1
+        
+        # Recursive calls
+        return self.sum_nodes(root.left) + self.sum_nodes(root.right)
 
     # def get_ancestors(self, root, target):
     #     if root is None:
@@ -145,7 +161,11 @@ bst.insert_(bst.root, 16)
 bst.insert_(bst.root, 12)
 # bst.delete(bst.root, 11)
 bst.in_order_level(bst.root)
-print(bst.get_nodes_at_distance(bst.root, 2))
+print(bst.sum_nodes(bst.root))
+# list = []
+# bst.get_nodes(bst.root, list)
+# print(list)
+# print(bst.get_nodes_at_distance(bst.root, 2))
 # print(bst.search(bst.root, 12))
 # print(bst.search(bst.root, 0))
 # print(bst.height(bst.root))
