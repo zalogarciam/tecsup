@@ -33,7 +33,7 @@ class Heap(): # Max Heap
     # Return if the index is a valid parent
     def is_valid_parent(self, index):
         if not self.has_left_child(index):
-            return True # Bug?
+            return True
         is_valid = self.items[index] >= self.left_child(index)
         if self.has_right_child(index):
             is_valid = is_valid and self.items[index] >= self.right_child(index)
