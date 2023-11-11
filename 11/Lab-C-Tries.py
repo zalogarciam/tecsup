@@ -77,6 +77,16 @@ class Trie:
         if len(child.children) == 0 and not child.eow:
             node.children.pop(char)
 
+    def count_words(self):
+        return self.count_words_(self.root)
+    
+    def count_words_(self, node):
+        count = 0
+        if node.eow: count = count + 1
+        for item in node.children.values():
+            count += self.count_words_(item)
+        return count
+
 trie = Trie()
 trie.insert("rebuild")
 trie.insert("recover")
@@ -86,5 +96,6 @@ trie.insert("car")
 trie.insert("home")
 trie.delete("revisit")
 trie.print()
+print(trie.count_words())
 # print(trie.search("rest"))
 # print(trie.search("res"))
