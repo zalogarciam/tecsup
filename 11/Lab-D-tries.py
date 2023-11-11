@@ -84,7 +84,17 @@ class Trie():
         return True
     
     def count_words(self):
-    pass
+        return self.count_words_(self.root)
+
+    # Time Complexity: O(n) n is the number of characters
+    # Space Complexity: O(m*L) 
+    # --> m is the number of words, L length of each word
+    def count_words_(self, node):
+        count = 0
+        if node.eow: count += 1
+        for item in node.children.values(): # times m
+            count += self.count_words_(item) # length of word/item
+        return count
 
 trie = Trie()
 trie.insert("INTERACT")
@@ -92,7 +102,8 @@ trie.insert("INTERNATIONAL")
 trie.insert("INTERNET")
 # print(trie.search("INTERACT"))
 # print(trie.search("INTERN"))
-trie.delete("INTERNATIONAL")
+# trie.delete("INTERNATIONAL")
 # trie.pre_order()
-trie.print()
+# trie.print()
 # trie.post_order()
+print(trie.count_words())
