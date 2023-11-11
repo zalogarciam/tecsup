@@ -49,7 +49,34 @@ class Trie:
         for char in node.children.values():
             self.print_(char, prefix)
     
+    # Time Complexity: O(L)
+    def search(self, word):
+        # "" or None --> False
+        if not word:
+            return False
         
+        current = self.root
+        for char in word:
+            if char in current.children:
+                current = current.children[char]
+            else:
+                return False
+        return current.eow
+    
+    def delete(self, word):
+        if word is None: return
+        self.delete_(self.root, word, 0)
+
+    def delete_(self, node, word, index):
+        if index == len(word):
+            node.eow = False
+            return
+        char = word[index]
+        child = node.children.get(char, None)
+        self.delete_(child, word, index + 1)
+        if len(child.children) == 0 and not child.eow:
+            node.children.pop(char)
+
 trie = Trie()
 trie.insert("rebuild")
 trie.insert("recover")
@@ -57,5 +84,7 @@ trie.insert("rest")
 trie.insert("revisit")
 trie.insert("car")
 trie.insert("home")
-trie.insert("read")
+trie.delete("revisit")
 trie.print()
+# print(trie.search("rest"))
+# print(trie.search("res"))
