@@ -53,15 +53,46 @@ class Trie():
         return current.eow
     
     def delete(self, word):
-        pass
+        if word is None: return
+        self.delete_(self.root, word, 0)
+
+    def delete_(self, node, word, index):
+        if index == len(word):
+            node.eow = False
+            return
+        char = word[index]
+        child = node.children.get(char, None)
+        self.delete_(child, word, index + 1)
+        if len(child.children) == 0 and not child.eow:
+            node.children.pop(char)
+
+    def remove(self, word):
+        current = self.root
+        for char in word:
+            if char not in current.children:
+                return False
+            current = current.children[char]
+        if current.eow:
+            current.eow = False
+            for child in current.children.values():
+                self.remove(child.data)
+            return True
+        if current.children:
+            current.children = {}
+            return True
+        current.data = None
+        return True
+    
+    def count_words(self):
+    pass
 
 trie = Trie()
 trie.insert("INTERACT")
 trie.insert("INTERNATIONAL")
 trie.insert("INTERNET")
-print(trie.search("INTERACT"))
-print(trie.search("INTERN"))
-
+# print(trie.search("INTERACT"))
+# print(trie.search("INTERN"))
+trie.delete("INTERNATIONAL")
 # trie.pre_order()
-# print()
+trie.print()
 # trie.post_order()
