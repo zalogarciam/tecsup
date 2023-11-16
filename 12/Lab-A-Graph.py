@@ -39,6 +39,12 @@ class Graph:
                 print(edge.label, end=", ")
             print()
 
+    def bfs(self):
+        pass
+
+    def dfs(self):
+        pass
+
 graph = Graph()
 graph.add_node('A')
 graph.add_node('B')
