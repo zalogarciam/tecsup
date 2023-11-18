@@ -21,6 +21,8 @@ class Graph:
         del self.nodes[label]
 
     def add_edge(self, source, destination):
+        if self.nodes[destination] in self.adjacency_list[source]:
+            return
         self.adjacency_list[source].append(self.nodes[destination])
     
     def remove_edge(self, source, destination):
