@@ -33,11 +33,31 @@ class Graph:
             print()
 
     def bfs(self, node):
-        pass
+        queue = [node]
+        visited = []
+        while len(queue) > 0:
+            current = queue.pop(0)
+            if current in visited:
+                continue
+            visited.append(current)
+            for neighbor in self.adjacency_list[current]:
+                if neighbor.label not in visited:
+                    queue.append(neighbor.label)
+        return visited
 
     def dfs(self, node):
-        pass
-
+        stack = [node]
+        visited = []
+        while len(stack) > 0:
+            current = stack.pop()
+            if current in visited:
+                continue
+            visited.append(current)
+            for neighbor in self.adjacency_list[current]:
+                if neighbor.label not in visited:
+                    stack.append(neighbor.label)
+        return visited
+    
 graph = Graph()
 graph.add_node('A')
 graph.add_node('B')
@@ -58,4 +78,6 @@ graph.add_edge('E', 'D')
 graph.add_edge('D', 'G')
 graph.add_edge('H', 'F')
 graph.add_edge('H', 'G')
-graph.pprint()
+# graph.pprint()
+print(graph.dfs('A'))
+print(graph.bfs('A'))
