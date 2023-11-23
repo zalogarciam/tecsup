@@ -1,3 +1,5 @@
+import heapq
+
 class Path:
     def __init__(self) -> None:
         self.list = []
@@ -43,8 +45,7 @@ class WeighthedGraph:
         queue = [(0, source)]
 
         while(len(queue) > 0):
-            queue.sort()
-            current = queue.pop(0)[1]
+            current = heapq.heappop(queue)[1]  
             visited.append(current)
 
             for edge in self.edges[current]:
