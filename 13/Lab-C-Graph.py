@@ -54,11 +54,11 @@ class WeightedGraph():
     def build_path(self, destination, previous_nodes):
         stack = [self.nodes[destination].label]
         previous = previous_nodes[destination]
-        while previous is not None:
+        while previous in previous_nodes:
             stack.append(previous)
-            if previous not in previous_nodes:
-                break
             previous = previous_nodes[previous]
+        stack.append(previous) # A
+
         path = []
         while len(stack) > 0:
             path.append(stack.pop())
@@ -70,20 +70,20 @@ graph.add_node('B')
 graph.add_node('C')
 graph.add_node('D')
 graph.add_node('E')
-# graph.add_edge('A', 'B', 40)
-# graph.add_edge('A', 'C', 5)
-# graph.add_edge('A', 'D', 20)
-# graph.add_edge('B', 'E', 50)
-# graph.add_edge('B', 'D', 10)
-# graph.add_edge('C', 'D', 30)
-# graph.add_edge('D', 'E', 100)
-graph.add_edge('A', 'C', 5)
 graph.add_edge('A', 'B', 40)
+graph.add_edge('A', 'C', 5)
 graph.add_edge('A', 'D', 20)
-graph.add_edge('B', 'D', 10)
 graph.add_edge('B', 'E', 50)
+graph.add_edge('B', 'D', 10)
 graph.add_edge('C', 'D', 30)
 graph.add_edge('D', 'E', 100)
+# graph.add_edge('A', 'C', 5)
+# graph.add_edge('A', 'B', 40)
+# graph.add_edge('A', 'D', 20)
+# graph.add_edge('B', 'D', 10)
+# graph.add_edge('B', 'E', 50)
+# graph.add_edge('C', 'D', 30)
+# graph.add_edge('D', 'E', 100)
 graph.dijkstra('A', 'E')
 
 
