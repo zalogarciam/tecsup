@@ -36,7 +36,7 @@ class WeightedGraph():
         previous_nodes = {}
 
         while len(queue) > 0:
-            current = heapq.heappop(queue)[1] 
+            current = queue.pop(0)[1]
             if current in visited:
                 continue
 
@@ -70,13 +70,16 @@ graph.add_node('B')
 graph.add_node('C')
 graph.add_node('D')
 graph.add_node('E')
+graph.add_node('F')
 graph.add_edge('A', 'B', 40)
 graph.add_edge('A', 'C', 5)
 graph.add_edge('A', 'D', 20)
+graph.add_edge('A', 'F', 5)
 graph.add_edge('B', 'E', 50)
 graph.add_edge('B', 'D', 10)
 graph.add_edge('C', 'D', 30)
 graph.add_edge('D', 'E', 100)
+graph.add_edge('F', 'B', 10)
 # graph.add_edge('A', 'C', 5)
 # graph.add_edge('A', 'B', 40)
 # graph.add_edge('A', 'D', 20)
