@@ -42,6 +42,30 @@ def ternary_search(array, target):
             left_index = mid_2 
     return False
 
-print(ternary_search(array, target))
+# print(ternary_search(array, target))
 
-    
+import math
+def jump_search(array, target):
+    block_size = math.sqrt(len(array))
+    start = 0
+    next = int(block_size)
+
+    while start < len(array) and array[next-1] < target:
+        start = next
+        next += int(block_size)
+        if next >= len(array) : next = len(array)
+    return lineal_search(array[start:next], target)
+        
+# print(jump_search(array, target))
+
+array = [3, 5, 6, 9, 11, 18, 20, 21, 24, 30]
+
+def exponential_search(array, target):
+    bound = 1
+    while array[bound] < target and bound < len(array):
+        bound = bound * 2
+    left = (bound // 2) + 1
+    right = min(len(array), bound + 1)
+    return binary_search(array[left:right], target)
+
+print(exponential_search(array, target))
